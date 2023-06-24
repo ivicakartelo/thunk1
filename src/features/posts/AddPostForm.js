@@ -10,10 +10,11 @@ export const AddPostForm = () => {
     const dispatch = useDispatch()
     const onTitleChanged = e => setTitle(e.target.value)
     const onContentChanged = e => steContent(e.target.value)
-
+/*
     const canSave = 
         [title, content].every(Boolean) && addRequestStatus === 'idle'
-
+*/
+    const canSave = Boolean(title) && Boolean(content) && Boolean(addRequestStatus === 'idle')
         const onSavePostClicked = async () => {
             if (canSave) {
                 try {
@@ -50,7 +51,7 @@ export const AddPostForm = () => {
                         value={content}
                         onChange={onContentChanged} 
                     />
-                    <button type="button" onClick={onSavePostClicked}>
+                    <button type="button" onClick={onSavePostClicked} disabled={!canSave}>
                         Save Post
                     </button>
                 </form>
