@@ -37,9 +37,12 @@ const PostExcerpt = ({ post }) => {
 export const PostsList = () => {
     const dispatch = useDispatch()
     const posts = useSelector(selectAllPosts)
+    console.log(posts)
     const postStatus = useSelector(state => state.posts.status)
+    console.log(postStatus)
     const error = useSelector(state => state.posts.error)
-
+    console.log(error)
+    
     useEffect(() => {
         postStatus === 'idle' && dispatch(fetchPosts())
     },[postStatus, dispatch])

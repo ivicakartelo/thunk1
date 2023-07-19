@@ -9,13 +9,13 @@ export const UpdatePostForm = ({ post, setShowEditForm }) => {
 
   const canSave = Boolean(title) && Boolean(content);
 
-  const onUpdatePostClicked = async () => {
+  const onUpdatePostClicked = async (e) => {
+    e.preventDefault()
     if (canSave) {
         dispatch(updatePost({ id: post.id, title: title, content: content }))
         setShowEditForm(false)
     }
   }
-
   return (
     <form onSubmit={onUpdatePostClicked}>
       <label htmlFor="postTitleEdit">Title</label>
