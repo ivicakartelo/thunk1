@@ -3,30 +3,18 @@ import { updatePost } from './postsSlice';
 import { useDispatch } from 'react-redux';
 
 export const UpdatePostForm = ({ post, setShowEditForm }) => {
-  const [title, setTitle] = useState(post.title);
-  const [content, setContent] = useState(post.content);
-  const [error, setError] = useState(null);
-  const dispatch = useDispatch();
+  const [title, setTitle] = useState(post.title)
+  const [content, setContent] = useState(post.content)
+  const dispatch = useDispatch()
 
   const canSave = Boolean(title) && Boolean(content);
 
-  const onUpdatePostClicked = async (e) => {
-    e.preventDefault();
+  const onUpdatePostClicked = async () => {
     if (canSave) {
-      try {
-        dispatch(updatePost({
-          id: post.id,
-          title: title.toString(),
-          content: content.toString(),
-        }));
-        setShowEditForm(false);
-      } catch (err) {
-        console.error('Failed to update the post: ', err);
-        setError('Error updating the post');
-      } finally {
-      }
+        dispatch(updatePost({ id: post.id, title: title, content: content }))
+        setShowEditForm(false)
     }
-  };
+  }
 
   return (
     <form onSubmit={onUpdatePostClicked}>
@@ -47,8 +35,6 @@ export const UpdatePostForm = ({ post, setShowEditForm }) => {
         onChange={(e) => setContent(e.target.value)}
       />
 
-      {error && <div>{error}</div>}
-
       <button type="submit" disabled={!canSave}>
         Update
       </button>
@@ -59,4 +45,4 @@ export const UpdatePostForm = ({ post, setShowEditForm }) => {
   );
 };
 
-export default UpdatePostForm;
+export default UpdatePostForm

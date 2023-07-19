@@ -21,7 +21,6 @@ const PostExcerpt = ({ post }) => {
             {showEditForm && updateId === post.id ? (
                 <UpdatePostForm
                     post={post}
-                    //handleUpdatePost={handleUpdatePost}
                     setShowEditForm={setShowEditForm}
                 />
                 ) : (
