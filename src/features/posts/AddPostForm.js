@@ -2,6 +2,16 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addNewPost } from './postsSlice'
 
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+
+
+
 export const AddPostForm = () => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
@@ -29,12 +39,31 @@ const onSavePostClicked = async () => {
     }
 }
 
+const card1 = (
+    <React.Fragment>
+      <CardContent>
+        
+        <Typography variant="h5" component="div">
+        Add New Post
+        </Typography>
+        
+      </CardContent>
+      
+    </React.Fragment>
+  );
+
 return (
     <section>
-        <h2>Add a New Post</h2>
+        
+        <Box sx={{ minWidth: 275 }}>
+            <Card variant="outlined">{card1}</Card>
+        </Box>
         <form>
-            <label htmlFor="postTitle"> Post Title:</label>
-            <input 
+        
+            <TextField 
+                margin="normal"
+                fullWidth
+                label="Post Title"
                 placeholder="Enter your title"
                 type="text"
                 id="postTitle"
@@ -42,17 +71,21 @@ return (
                 value={title}
                 onChange={onTitleChanged} 
             />
-            <label htmlFor="postContent">Content:</label>
-            <textarea
+            <TextField
+                margin="normal"
+                fullWidth
+                label="Post Content"
+                multiline
+                rows={4}
                 placeholder="Enter your content"
                 id="postContent"
                 name="postContent"
                 value={content}
                 onChange={onContentChanged} 
             />
-<button type="button" onClick={onSavePostClicked} disabled={!canSave}>
+<Button variant="contained" onClick={onSavePostClicked} disabled={!canSave}>
     Save Post
-</button>
+</Button>
         </form>
         {error && <div>{error}</div>}
     </section>
