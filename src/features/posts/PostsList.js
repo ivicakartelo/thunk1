@@ -10,77 +10,78 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 const PostExcerpt = ({ post }) => {
-    const [showEditForm, setShowEditForm] = useState(false);
-    const [updateId, setUpdateId] = useState('')
-    const dispatch = useDispatch()
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [updateId, setUpdateId] = useState('')
+  const dispatch = useDispatch()
 
-    const handleUpdate = (id) => {
-        setUpdateId(id);
-        setShowEditForm(true);
-      }
+  const handleUpdate = (id) => {
+      setUpdateId(id);
+      setShowEditForm(true);
+    }
 
-      const card = (
-        <React.Fragment>
-          <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-              Published
-            </Typography>
-            <Typography variant="h5" component="div">
-            {post.title}
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              Author
-            </Typography>
-            <Typography variant="body2">
-                {post.content}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            {showEditForm && updateId === post.id ? (
-                <UpdatePostForm
-                    post={post}
-                    setShowEditForm={setShowEditForm}
-                />
-                ) : (
-                <Button size="small" variant="contained" onClick={() => handleUpdate(post.id)}>
-                    Update
-                </Button>
-            )}
+  const paragraphs = post.content.split('\n');
 
-            <Button size="small" color="error" variant="contained" onClick={() => dispatch(handleDelete(post.id))}>Delete</Button>
-          </CardActions>
-        </React.Fragment>
-      );
+  const card = (
+    <React.Fragment>
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          Published
+        </Typography>
+        <Typography variant="h5" component="div">
+        {post.title}
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          Author
+        </Typography>
+        <Typography variant="body2">
+            {paragraphs.map((paragraph, index) => (
+            <p key={index} dangerouslySetInnerHTML=
+            {{ __html: paragraph }}></p>
+  ))}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        {showEditForm && updateId === post.id ? (
+            <UpdatePostForm
+                post={post}
+                setShowEditForm={setShowEditForm}
+            />
+            ) : (
+            <Button size="small" variant="contained" onClick={() => handleUpdate(post.id)}>
+                Update
+            </Button>
+        )}
 
-      const card1 = (
-        <React.Fragment>
-          <CardContent>
-            
-            <Typography variant="h5" component="div">
-            Posts
-            </Typography>
-            
-            
-          </CardContent>
+        <Button size="small" color="error" variant="contained" onClick={() => dispatch(handleDelete(post.id))}>Delete</Button>
+      </CardActions>
+    </React.Fragment>
+  );
+
+    const card1 = (
+      <React.Fragment>
+        <CardContent>
+          <Typography variant="h5" component="div">
+          Posts
+          </Typography>
+        </CardContent>
+      </React.Fragment>
+    );
+
+  return (
+      
+      <article key={post.id}>
+          <Box sx={{ minWidth: 275 }}>
+              <Card variant="outlined">{card1}</Card>
+          </Box>
+          <Box sx={{ minWidth: 275 }}>
+              <Card variant="outlined">{card}</Card>
+          </Box>
           
-        </React.Fragment>
-      );
 
-    return (
-        
-        <article key={post.id}>
-            <Box sx={{ minWidth: 275 }}>
-                <Card variant="outlined">{card1}</Card>
-            </Box>
-            <Box sx={{ minWidth: 275 }}>
-                <Card variant="outlined">{card}</Card>
-            </Box>
-            
-
-            
-        </article>
-    )
-}
+          
+      </article>
+  )
+  }
 
 export const PostsList = () => {
     const dispatch = useDispatch()
