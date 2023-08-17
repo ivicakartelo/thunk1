@@ -2,86 +2,37 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAllPosts, fetchPosts, handleDelete } from './postsSlice'
 import { UpdatePostForm } from './UpdatePostForm'
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
 
 const PostExcerpt = ({ post }) => {
-  const [showEditForm, setShowEditForm] = useState(false);
-  const [updateId, setUpdateId] = useState('')
-  const dispatch = useDispatch()
+    const [showEditForm, setShowEditForm] = useState(false);
+    const [updateId, setUpdateId] = useState('')
+    const dispatch = useDispatch()
 
-  const handleUpdate = (id) => {
-      setUpdateId(id);
-      setShowEditForm(true);
-    }
+    const handleUpdate = (id) => {
+        setUpdateId(id);
+        setShowEditForm(true);
+      }
 
-  const paragraphs = post.content.split('\n');
+    return (
+        <article key={post.id}>
+            <h3>{post.title}</h3>
+            <p>{post.content}</p>
 
-  const card = (
-    <React.Fragment>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Published
-        </Typography>
-        <Typography variant="h5" component="div">
-        {post.title}
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          Author
-        </Typography>
-        <Typography variant="body2">
-            {paragraphs.map((paragraph, index) => (
-            <p key={index} dangerouslySetInnerHTML=
-            {{ __html: paragraph }}></p>
-  ))}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        {showEditForm && updateId === post.id ? (
-            <UpdatePostForm
-                post={post}
-                setShowEditForm={setShowEditForm}
-            />
-            ) : (
-            <Button size="small" variant="contained" onClick={() => handleUpdate(post.id)}>
-                Update
-            </Button>
-        )}
+            {showEditForm && updateId === post.id ? (
+                <UpdatePostForm
+                    post={post}
+                    setShowEditForm={setShowEditForm}
+                />
+                ) : (
+                <button onClick={() => handleUpdate(post.id)}>
+                    Update
+                </button>
+            )}
 
-        <Button size="small" color="error" variant="contained" onClick={() => dispatch(handleDelete(post.id))}>Delete</Button>
-      </CardActions>
-    </React.Fragment>
-  );
-
-    const card1 = (
-      <React.Fragment>
-        <CardContent>
-          <Typography variant="h5" component="div">
-          Posts
-          </Typography>
-        </CardContent>
-      </React.Fragment>
-    );
-
-  return (
-      
-      <article key={post.id}>
-          <Box sx={{ minWidth: 275 }}>
-              <Card variant="outlined">{card1}</Card>
-          </Box>
-          <Box sx={{ minWidth: 275 }}>
-              <Card variant="outlined">{card}</Card>
-          </Box>
-          
-
-          
-      </article>
-  )
-  }
+            <button onClick={() => dispatch(handleDelete(post.id))}>Delete</button>
+        </article>
+    )
+}
 
 export const PostsList = () => {
     const dispatch = useDispatch()
@@ -108,6 +59,7 @@ postStatus === 'loading' ? (
 
     return (
         <section>
+            <h2>Posts</h2>
             {content}
         </section>
     )
