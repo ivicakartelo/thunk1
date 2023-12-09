@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectAllPosts, fetchPosts, handleDelete } from './postsSlice'
 import { UpdatePostForm } from './UpdatePostForm'
 
+console.log("The PostsList commences rendering")
+
 const PostExcerpt = ({ post }) => {
     const [showEditForm, setShowEditForm] = useState(false);
     const [updateId, setUpdateId] = useState('')
@@ -38,6 +40,7 @@ export const PostsList = () => {
     const dispatch = useDispatch()
     const posts = useSelector(selectAllPosts)
     console.log(posts)
+    console.log("The PostsList rendering")
     const postStatus = useSelector(state => state.posts.status)
     console.log(postStatus)
     const error = useSelector(state => state.posts.error)
@@ -54,7 +57,7 @@ postStatus === 'loading' ? (
 ) : postStatus === 'succeeded' ? (
     content = posts.map(post => <PostExcerpt key={post.id} post={post} />)
 ) : (
-    content = <div>{error}</div>
+    content = <div>Error: {error}</div>
 )
 
     return (

@@ -37,26 +37,44 @@ export const postsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchPosts.pending, (state) => {
-        state.status = 'loading';
+        state.status = 'loading';y
+        
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.posts = state.posts.concat(action.payload);
         state.status = 'succeeded';
       })
+      .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(addNewPost.pending, (state) => {
+        state.status = 'loading';
+      })
       .addCase(addNewPost.fulfilled, (state, action) => {
         state.posts.push(action.payload);
         state.status = 'succeeded';
+      })
+      .addCase(addNewPost.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(handleDelete.pending, (state) => {
+        state.status = 'loading';
       })
       .addCase(handleDelete.fulfilled, (state, action) => {
         const id = action.payload.id;
         state.posts = state.posts.filter((post) => post.id !== id);
         state.status = 'succeeded';
       })
+      .addCase(handleDelete.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
       .addCase(updatePost.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(updatePost.fulfilled, (state, action) => {
-        state.status = 'succeeded';
         const { id, title, content } = action.payload;
         const existingPost = state.posts.find((post) => post.id === id);
         if (existingPost) {
@@ -66,7 +84,9 @@ export const postsSlice = createSlice({
         state.status = 'succeeded';
       })
       .addCase(updatePost.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = 'failed'
+        state.error = "Update failed"
+        state.error = action.error.message;
       })
     }
   })
