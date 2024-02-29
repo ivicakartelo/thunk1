@@ -15,6 +15,7 @@ export const UpdatePostForm = ({ post, setShowEditForm }) => {
         dispatch(updatePost({ id: post.id, title: title, content: content }))
         setShowEditForm(false)
     }
+    console.log("The UpdatePostForm.js rendered")
   }
   return (
     <form onSubmit={onUpdatePostClicked}>

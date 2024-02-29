@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addNewPost } from './postsSlice'
 
-console.log("The AddPostForm.js rendering")
+console.log("The AddPostForm.js rendered")
 
 export const AddPostForm = () => {
     const [title, setTitle] = useState('')

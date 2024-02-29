@@ -8,22 +8,23 @@ const initialState = {
 };
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await axios.get('https://640114a00a2a1afebee5c77d.mockapi.io/post1');
+  const response = await axios.get('https://63fa8c1e7a045e192b5bd47a.mockapi.io/post2');
+  
   return response.data;
 });
 
 export const addNewPost = createAsyncThunk('posts/addNewPost', async (initialPost) => {
-  const response = await axios.post('https://640114a00a2a1afebee5c77d.mockapi.io/post1', initialPost);
+  const response = await axios.post('https://63fa8c1e7a045e192b5bd47a.mockapi.io/post2', initialPost);
   return response.data;
 });
 
 export const handleDelete = createAsyncThunk('posts/handleDelete', async (id) => {
-  const response = await axios.delete(`https://640114a00a2a1afebee5c77d.mockapi.io/post1/${id}`);
+  const response = await axios.delete(`https://63fa8c1e7a045e192b5bd47a.mockapi.io/post2/${id}`);
   return response.data;
 });
 
 export const updatePost = createAsyncThunk('posts/updatePost', async ({ id, title, content }) => {
-  await axios.put(`https://640114a00a2a1afebee5c77d.mockapi.io/post1/${id}`, {
+  await axios.put(`https://63fa8c1e7a045e192b5bd47a.mockapi.io/post2/${id}`, {
     title,
     content,
   });

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectAllPosts, fetchPosts, handleDelete } from './postsSlice'
 import { UpdatePostForm } from './UpdatePostForm'
 
-console.log("The PostsList commences rendering")
+console.log("The PostsList rendered")
 
 const PostExcerpt = ({ post }) => {
     const [showEditForm, setShowEditForm] = useState(false);
@@ -14,7 +14,7 @@ const PostExcerpt = ({ post }) => {
         setUpdateId(id);
         setShowEditForm(true);
       }
-
+      console.log("The PostExcerpt rendered")
     return (
         <article key={post.id}>
             <h3>{post.title}</h3>
@@ -40,21 +40,21 @@ export const PostsList = () => {
     const dispatch = useDispatch()
     const posts = useSelector(selectAllPosts)
     console.log(posts)
-    console.log("The PostsList rendering")
-    const postStatus = useSelector(state => state.posts.status)
-    console.log(postStatus)
+    console.log("The PostsList rendered")
+    const status = useSelector(state => state.posts.status)
+    console.log(status)
     const error = useSelector(state => state.posts.error)
     console.log(error)
     
     useEffect(() => {
-        postStatus === 'idle' && dispatch(fetchPosts())
-    },[postStatus, dispatch])
+        status === 'idle' && dispatch(fetchPosts())
+    },[status, dispatch])
 
 let content
     
-postStatus === 'loading' ? (
+status === 'loading' ? (
     content = <h1>Loading...</h1>
-) : postStatus === 'succeeded' ? (
+) : status === 'succeeded' ? (
     content = posts.map(post => <PostExcerpt key={post.id} post={post} />)
 ) : (
     content = <div>Error: {error}</div>

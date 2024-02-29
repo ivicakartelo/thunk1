@@ -1,7 +1,7 @@
 import {AddPostForm} from './features/posts/AddPostForm'
 import {PostsList} from './features/posts/PostsList'
 
-console.log("The app commences rendering")
+console.log("The app.js rendered")
 
 function App() {
     
