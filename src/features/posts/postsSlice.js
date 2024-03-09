@@ -92,5 +92,3 @@ export const postsSlice = createSlice({
     }
   })
 export default postsSlice.reducer;
-export const selectAllPosts = (state) => state.posts.posts;
-export const selectPostById = (state, postId) => state.posts.posts.find((post) => post.id === postId);

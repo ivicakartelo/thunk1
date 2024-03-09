@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectAllPosts, fetchPosts, handleDelete } from './postsSlice'
+import { fetchPosts, handleDelete } from './postsSlice'
 import { UpdatePostForm } from './UpdatePostForm'
 
 console.log("The PostsList rendered")
@@ -38,7 +38,7 @@ const PostExcerpt = ({ post }) => {
 
 export const PostsList = () => {
     const dispatch = useDispatch()
-    const posts = useSelector(selectAllPosts)
+    const posts = useSelector(state => state.posts.posts)
     console.log(posts)
     console.log("The PostsList rendered")
     const status = useSelector(state => state.posts.status)
