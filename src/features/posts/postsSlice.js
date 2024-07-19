@@ -15,11 +15,13 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 
 export const addNewPost = createAsyncThunk('posts/addNewPost', async (initialPost) => {
   const response = await axios.post('https://63fa8c1e7a045e192b5bd47a.mockapi.io/post2', initialPost);
+  console.log(initialPost)
   return response.data;
 });
 
 export const handleDelete = createAsyncThunk('posts/handleDelete', async (id) => {
   const response = await axios.delete(`https://63fa8c1e7a045e192b5bd47a.mockapi.io/post2/${id}`);
+  console.log(response.data)
   return response.data;
 });
 

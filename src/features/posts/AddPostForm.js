@@ -2,17 +2,18 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addNewPost } from './postsSlice'
 
-console.log("The AddPostForm.js rendered")
-
 export const AddPostForm = () => {
+    console.log("The AddPostForm.js rendered") //// This logs when the component renders
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
     const [addRequestStatus, setAddRequestStatus] = useState('idle')
     const [error, setError] = useState(null)
     const dispatch = useDispatch()
-    const onTitleChanged = e => setTitle(e.target.value)
+    const onTitleChanged = (e) => setTitle(e.target.value)
     const onContentChanged = e => setContent(e.target.value)
 
+    //console.log(title)
+    console.log(`Title: ${title}`)
 const canSave = Boolean(title) && Boolean(content) && Boolean(addRequestStatus === 'idle')
 const onSavePostClicked = async () => {
     if (canSave) {
@@ -42,7 +43,7 @@ return (
                 id="postTitle"
                 name="postTitle"
                 value={title}
-                onChange={onTitleChanged} 
+                onChange={onTitleChanged}
             />
             <label htmlFor="postContent">Content:</label>
             <textarea

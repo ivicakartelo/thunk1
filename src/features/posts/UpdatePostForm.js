@@ -3,10 +3,12 @@ import { updatePost } from './postsSlice';
 import { useDispatch } from 'react-redux';
 
 export const UpdatePostForm = ({ post, setShowEditForm }) => {
+  console.log("The UpdatePostForm.js rendered")
   const [title, setTitle] = useState(post.title)
   const [content, setContent] = useState(post.content)
   const dispatch = useDispatch()
-
+console.log(title)
+console.log(content)
   const canSave = Boolean(title) && Boolean(content);
 
   const onUpdatePostClicked = async (e) => {
@@ -14,7 +16,7 @@ export const UpdatePostForm = ({ post, setShowEditForm }) => {
     if (canSave) {
         dispatch(updatePost({ id: post.id, title: title, content: content }))
         setShowEditForm(false)
-    }
+    }   
     console.log("The UpdatePostForm.js rendered")
   }
   return (

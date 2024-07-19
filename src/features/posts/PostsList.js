@@ -3,9 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchPosts, handleDelete } from './postsSlice'
 import { UpdatePostForm } from './UpdatePostForm'
 
-console.log("The PostsList rendered")
-
-const PostExcerpt = ({ post }) => {
+const PostExcerpt = React.memo(({ post }) => {
+    console.log("The PostExcerpt rendered")
     const [showEditForm, setShowEditForm] = useState(false);
     const [updateId, setUpdateId] = useState('')
     const dispatch = useDispatch()
@@ -13,10 +12,10 @@ const PostExcerpt = ({ post }) => {
     const handleUpdate = (id) => {
         setUpdateId(id);
         setShowEditForm(true);
-      }
-      console.log("The PostExcerpt rendered")
+      }      
     return (
         <article key={post.id}>
+
             <h3>{post.title}</h3>
             <p>{post.content}</p>
 
@@ -30,28 +29,26 @@ const PostExcerpt = ({ post }) => {
                     Update
                 </button>
             )}
-
             <button onClick={() => dispatch(handleDelete(post.id))}>Delete</button>
         </article>
     )
-}
-
+})
 export const PostsList = () => {
+    console.log("The PostsList rendered")
     const dispatch = useDispatch()
     const posts = useSelector(state => state.posts.posts)
     console.log(posts)
-    console.log("The PostsList rendered")
     const status = useSelector(state => state.posts.status)
     console.log(status)
     const error = useSelector(state => state.posts.error)
     console.log(error)
-    
+  
     useEffect(() => {
         status === 'idle' && dispatch(fetchPosts())
     },[status, dispatch])
 
 let content
-    
+
 status === 'loading' ? (
     content = <h1>Loading...</h1>
 ) : status === 'succeeded' ? (

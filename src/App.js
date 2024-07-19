@@ -1,10 +1,8 @@
 import {AddPostForm} from './features/posts/AddPostForm'
 import {PostsList} from './features/posts/PostsList'
 
-console.log("The app.js rendered")
-
-function App() {
-    
+const App = () => {
+    console.log("The app.js rendered")
     return (
         <>
             <AddPostForm />
